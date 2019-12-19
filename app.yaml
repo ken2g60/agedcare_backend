@@ -3,7 +3,7 @@ env: flex
 entrypoint: gunicorn -b :$PORT agedcare.wsgi
 
 beta_settings:
-    cloud_sql_instances: agedcare-db-instance
+    cloud_sql_instances: agedcare-262421:us-east1:agedcare-db-instance
 
 runtime_config:
   python_version: 3
