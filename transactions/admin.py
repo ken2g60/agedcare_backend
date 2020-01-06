@@ -5,4 +5,4 @@ from .models import Deposit, Withdraw, TransactionHistory
 
 admin.site.register(Deposit)
 admin.site.register(Withdraw)
-admin.site.admin.site.register(TransactionHistory)
+admin.site.register(TransactionHistory)
