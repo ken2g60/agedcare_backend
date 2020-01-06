@@ -1,5 +1,11 @@
 from django.db import models
 from django.utils.translation import gettext as _
+from django.db.models import signals
+from django.dispatch import receiver
+
+from django.db.models.signals import pre_save
+from utils.helpers import random_generate 
+
 
 # Create your models here.
 class PersonalDetail(models.Model):
@@ -25,9 +31,7 @@ class PersonalDetail(models.Model):
         ('Social Security', 'Social Security'),
         ('Other', 'Other')
     )
-    name = models.CharField(_("Name"), max_length=50)
     date_of_birth = models.CharField(_("Date of birth"), max_length=50)
-    gender = models.CharField(_("Gender"), max_length=50, choices=gender_options, default=gender_options[0][0])
     height = models.CharField(_("Height"), max_length=50)
     occupation = models.CharField(_("Occupation"), max_length=50)
     sector = models.CharField(_("Sector"), max_length=50, choices=sector_options, default=sector_options[0][0])
@@ -40,14 +44,15 @@ class PersonalDetail(models.Model):
     registered_nhis =  models.BooleanField(_("Registered with NHIS"), default=False)
     private_health = models.BooleanField(_("Registered with any private health insurance?"), default=False)
     pension_scheme = models.CharField(_("Pension Scheme"), max_length=50)
-    userId = models.CharField(_("Unique ID"), max_length=50)
+    user = models.ForeignKey("UserModel", on_delete=models.CASCADE)
     created_at = models.DateTimeField(_("Created At"), auto_now=True)
 
 
 
 class HealthData(models.Model):
-    userId = models.CharField(_("Unique ID"), max_length=50)
-    bloodglucose = models.CharField(_("Blood Glucose"), max_length=50)
+    userId = models.CharField(_("Unique ID"), max_length=50, null=True, blank=True)
+    phonenumber = models.CharField(_("Phone Number"), max_length=50)
+    bloodsugar = models.CharField(_("Blood Sugar"), max_length=50)
     bloodpressure = models.CharField(_("Blood Pressure"), max_length=50)
     bloodcholesterol = models.CharField(_("Blood Cholesterol"), max_length=50)
     bloodlevel = models.CharField(_("Blood level (Hemoglobin)"), max_length=50)
@@ -57,8 +62,9 @@ class HealthData(models.Model):
 
 class ContributionModel(models.Model):
     userId = models.CharField(_("Unique ID"), max_length=50)
+    momo = models.CharField(_("Mobile Money"), max_length=50)
     amount = models.CharField(_("Amount"), max_length=50)
-    month = models.CharField(_("Month"), max_length=50)
+    month = models.CharField(_("Month"), max_length=50, null=True, blank=True)
     created_at = models.DateTimeField(_("Created At"), auto_now=True)
 
 
@@ -69,3 +75,18 @@ class ClaimsModel(models.Model):
     facility_attended = models.CharField(_("Facility Attended"), max_length=50)
     date_attended = models.CharField(_("Facility Attended"), max_length=50)
     created_at = models.DateTimeField(_("Created At"), auto_now=True)
+
+
+class UserModel(models.Model):
+    userId = models.CharField(_("User ID"), max_length=50)
+    session_phonenumber = models.CharField(_("Session Phone Number"), max_length=50)
+    fullname = models.CharField(_("Full Name"), max_length=50)
+    phonenumber = models.CharField(_("Phone Number"), max_length=50)
+    gender = models.CharField(_("Gender"), max_length=50)
+    created_at = models.DateTimeField(_("Created At"), auto_now_add=True)
+    
+    
+def generate_user_id(instance, sender, *args, **kwargs):
+    if not instance.userId:
+        instance.userId = random_generate(4)
+pre_save.connect(generate_user_id, sender=UserModel)

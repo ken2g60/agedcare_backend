@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'careapp',
     'agedcare_ussd',
+    'transactions',
 ]
 
 MIDDLEWARE = [
@@ -80,13 +81,14 @@ WSGI_APPLICATION = 'agedcare.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'agedcare',
-        'USER': 'mac',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': 5432
+        'NAME': 'agedcareprod',
+        'USER': 'agedcare',
+        'PASSWORD': 'B7eRF7KSJa',
+        'HOST': '34.69.214.38',
+        'PORT': 5432,
     }
 }
+
 
 
 # Password validation
@@ -125,4 +127,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
+STATIC_URL = 'https://storage.googleapis.com/agecare-static/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = 'static'
