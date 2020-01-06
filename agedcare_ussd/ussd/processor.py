@@ -62,6 +62,9 @@ class Ussd(object):
         
         elif process == 'health':
             text = 'Self Check Results Submitted Successfully'
+        
+        elif process == 'performance':
+            text = 'Your Performance will send to You'
             
         return self.process_response(message=text,response_type=response_type,client_state=client_state)
     
@@ -198,16 +201,16 @@ class Ussd(object):
                 return self.saving_user_id()
             
             elif self.message == FOUR:
-                return self.help()
+                return self.display_performance()
 
         else:
             return self.display_main_menu(error=True)
     
     def display_main_menu(self, error=False):
-        message = 'Welcome to AgedCare \n 1. Register \n 2. AgedCare \n 3. Health Fund'
+        message = 'Welcome to AgedCare \n 1. Register \n 2. Self-check results \n 3. Health Fund \n 4. Health Performance'
 
         if error:
-            message = 'Invalid Option Selected \n 1. Register \n 2. AgedCare \n 3. Health Fund'
+            message = 'Invalid Option Selected \n 1. Register \n 2. AgedCare \n 3. Health Fund \n 4. Health Performance'
         
         stage = MAIN_MENU
         response_type = RESPONSE
@@ -391,6 +394,10 @@ class Ussd(object):
             amount=aggregated_data.get('momo')
         )
         return self.finish(process='saving')
+
+    
+    def display_performance(self, error=False):
+        return self.finish(process='performance')
 
         
     def help(self, error=False):
