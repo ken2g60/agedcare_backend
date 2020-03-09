@@ -43,33 +43,23 @@ class PersonalDetail(models.Model):
     number_dependents = models.CharField(_("Number Dependents"), max_length=50)
     registered_nhis =  models.BooleanField(_("Registered with NHIS"), default=False)
     private_health = models.BooleanField(_("Registered with any private health insurance?"), default=False)
-    pension_scheme = models.CharField(_("Pension Scheme"), max_length=50)
+    pension_scheme = models.CharField(_("Pension Scheme"), max_length=50, choices=pension_options)
     user = models.ForeignKey("UserModel", on_delete=models.CASCADE)
     created_at = models.DateTimeField(_("Created At"), auto_now=True)
 
 
 
-class HealthData(models.Model):
-    userId = models.CharField(_("Unique ID"), max_length=50, null=True, blank=True)
-    phonenumber = models.CharField(_("Phone Number"), max_length=50)
-    bloodsugar = models.CharField(_("Blood Sugar"), max_length=50)
-    bloodpressure = models.CharField(_("Blood Pressure"), max_length=50)
-    bloodcholesterol = models.CharField(_("Blood Cholesterol"), max_length=50)
-    bloodlevel = models.CharField(_("Blood level (Hemoglobin)"), max_length=50)
-    weight = models.CharField(_("Weight"), max_length=50)
-    created_at = models.DateTimeField(_("Created At"), auto_now=True)
-
-
 class ContributionModel(models.Model):
-    userId = models.CharField(_("Unique ID"), max_length=50)
+    userId = models.CharField(_("User ID"), max_length=50)
     momo = models.CharField(_("Mobile Money"), max_length=50)
     amount = models.CharField(_("Amount"), max_length=50)
+    # system get month paid
     month = models.CharField(_("Month"), max_length=50, null=True, blank=True)
     created_at = models.DateTimeField(_("Created At"), auto_now=True)
 
 
 class ClaimsModel(models.Model):
-    userId = models.CharField(_("Unique ID"), max_length=50)
+    userId = models.CharField(_("User ID"), max_length=50)
     amount_withdraw =  models.CharField(_("Withdraw"), max_length=50)
     purpose =  models.CharField(_("Purpose"), max_length=50)
     facility_attended = models.CharField(_("Facility Attended"), max_length=50)
@@ -83,6 +73,7 @@ class UserModel(models.Model):
     fullname = models.CharField(_("Full Name"), max_length=50)
     phonenumber = models.CharField(_("Phone Number"), max_length=50)
     gender = models.CharField(_("Gender"), max_length=50)
+    balance = models.DecimalField(default=0, max_digits=12, decimal_places=2)
     created_at = models.DateTimeField(_("Created At"), auto_now_add=True)
     
     

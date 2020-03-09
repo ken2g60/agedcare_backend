@@ -4,10 +4,13 @@ from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 
 
 
-from careapp.models import UserModel, HealthData
+from careapp.models import UserModel
+from health.models import HealthData
 from django.db.models import Q
 
 
+from pyhubtel_sms import SMS
+sms = SMS(client_id='', client_secret='')
 
 class Ussd(object):
 
@@ -55,6 +58,18 @@ class Ussd(object):
         client_state = FINISH
 
         if process == 'registration':
+            # send sms to the register user phone number with user id
+            # msg to user_id.userId
+            user_id = UserModel.objects.filter(session_phonenumber=self.phone_number)
+            
+            message = Message(
+                sender='userids',
+                content='Your User ID {}. Please keep it secret'.format(user_id),
+                recipient=self.phone_number,
+                registered_delivery=True,
+            )
+            sms.send(message)
+            
             text = 'Thank You for Registering'
             
         elif process == 'saving':
@@ -64,7 +79,10 @@ class Ussd(object):
             text = 'Self Check Results Submitted Successfully'
         
         elif process == 'performance':
-            text = 'Your Performance will send to You'
+            text = 'Your Performance will be send to you'
+        
+        elif process == 'existing_account':
+            text = 'Phone Number is already registered'
             
         return self.process_response(message=text,response_type=response_type,client_state=client_state)
     
@@ -85,6 +103,9 @@ class Ussd(object):
 
             if self.message == '':
                 return self.register_enter_fullname(error=True)
+            
+            if UserModel.objects.filter(session_phonenumber=self.phone_number).exits():
+                return self.finish(process='existing_account')
             
             self.save_data({'fullname': self.message})
             return self.register_enter_telephone()
@@ -114,7 +135,6 @@ class Ussd(object):
             
             if self.message == '':
                 return self.saving_amount(error=True)
-            
             
             self.save_data({'userId': self.message})
             return self.saving_momo()

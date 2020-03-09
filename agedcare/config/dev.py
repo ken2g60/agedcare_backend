@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'careapp',
     'agedcare_ussd',
+    'transactions',
+    'health',
 ]
 
 MIDDLEWARE = [
