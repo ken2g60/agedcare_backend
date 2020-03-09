@@ -1,1 +1,1 @@
-web: gunicorn agedcare:app
+web: gunicorn  agedcare.wsgi:application --log-file -
