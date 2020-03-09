@@ -104,7 +104,7 @@ class Ussd(object):
             if self.message == '':
                 return self.register_enter_fullname(error=True)
             
-            if UserModel.objects.filter(session_phonenumber=self.phone_number).exits():
+            if UserModel.objects.filter(~Q(session_phonenumber=self.phone_number)):
                 return self.finish(process='existing_account')
             
             self.save_data({'fullname': self.message})
