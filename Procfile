@@ -1,1 +1,1 @@
-web: gunicorn agedcare.wsgi
+web: gunicorn agedcare:app
