@@ -62,13 +62,13 @@ class Ussd(object):
             # msg to user_id.userId
             user_id = UserModel.objects.filter(session_phonenumber=self.phone_number)
             
-            message = Message(
-                sender='userids',
-                content='Your User ID {}. Please keep it secret'.format(user_id),
-                recipient=self.phone_number,
-                registered_delivery=True,
-            )
-            sms.send(message)
+            # message = Message(
+            #     sender='userids',
+            #     content='Your User ID {}. Please keep it secret'.format(user_id),
+            #     recipient=self.phone_number,
+            #     registered_delivery=True,
+            # )
+            # sms.send(message)
             
             text = 'Thank You for Registering'
             
