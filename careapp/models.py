@@ -8,6 +8,20 @@ from utils.helpers import random_generate
 
 
 # Create your models here.
+class UserModel(models.Model):
+    userId = models.CharField(_("User ID"), max_length=50)
+    session_phonenumber = models.CharField(_("Session Phone Number"), max_length=50)
+    fullname = models.CharField(_("Full Name"), max_length=50)
+    phonenumber = models.CharField(_("Phone Number"), max_length=50)
+    gender = models.CharField(_("Gender"), max_length=50)
+    balance = models.DecimalField(default=0, max_digits=12, decimal_places=2)
+    created_at = models.DateTimeField(_("Created At"), auto_now_add=True)
+    
+    
+    def __str__(self):
+        return self.fullname, self.userId
+    
+    
 class PersonalDetail(models.Model):
 
     gender_options = (
@@ -44,9 +58,8 @@ class PersonalDetail(models.Model):
     registered_nhis =  models.BooleanField(_("Registered with NHIS"), default=False)
     private_health = models.BooleanField(_("Registered with any private health insurance?"), default=False)
     pension_scheme = models.CharField(_("Pension Scheme"), max_length=50, choices=pension_options)
-    user = models.ForeignKey("UserModel", on_delete=models.CASCADE)
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     created_at = models.DateTimeField(_("Created At"), auto_now=True)
-
 
 
 class ContributionModel(models.Model):
@@ -67,14 +80,7 @@ class ClaimsModel(models.Model):
     created_at = models.DateTimeField(_("Created At"), auto_now=True)
 
 
-class UserModel(models.Model):
-    userId = models.CharField(_("User ID"), max_length=50)
-    session_phonenumber = models.CharField(_("Session Phone Number"), max_length=50)
-    fullname = models.CharField(_("Full Name"), max_length=50)
-    phonenumber = models.CharField(_("Phone Number"), max_length=50)
-    gender = models.CharField(_("Gender"), max_length=50)
-    balance = models.DecimalField(default=0, max_digits=12, decimal_places=2)
-    created_at = models.DateTimeField(_("Created At"), auto_now_add=True)
+
     
     
 def generate_user_id(instance, sender, *args, **kwargs):
