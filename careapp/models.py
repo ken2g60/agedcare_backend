@@ -19,7 +19,7 @@ class UserModel(models.Model):
     
     
     def __str__(self):
-        return self.fullname, self.userId
+        return self.fullname
     
     
 class PersonalDetail(models.Model):
