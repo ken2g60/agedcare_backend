@@ -18,6 +18,7 @@ class UserModel(models.Model):
     created_at = models.DateTimeField(_("Created At"), auto_now_add=True)
     
     
+    
     def __str__(self):
         return self.fullname
     
@@ -58,8 +59,20 @@ class PersonalDetail(models.Model):
     registered_nhis =  models.BooleanField(_("Registered with NHIS"), default=False)
     private_health = models.BooleanField(_("Registered with any private health insurance?"), default=False)
     pension_scheme = models.CharField(_("Pension Scheme"), max_length=50, choices=pension_options)
-    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    user = models.OneToOneField(UserModel, related_name='personal', on_delete=models.CASCADE)
     created_at = models.DateTimeField(_("Created At"), auto_now=True)
+    
+    
+    def __str__(self):
+        return self.date_of_birth
+    
+    
+    def model_callable(self):
+        return self.user
+        
+    
+    
+
 
 
 class ContributionModel(models.Model):
