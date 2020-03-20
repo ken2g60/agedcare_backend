@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'agedcare_ussd',
     'transactions',
     'health',
+    'post',
 ]
 
 MIDDLEWARE = [
