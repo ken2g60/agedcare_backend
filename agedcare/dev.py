@@ -84,10 +84,10 @@ WSGI_APPLICATION = 'agedcare.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd746senrqv07hd',
-        'USER': 'jtyvnmdyfubbxx',
-        'PASSWORD': 'fd7fcb2b21ba22254f89686196f9e20a01757237648d95a416f8cd2345e971a3',
-        'HOST': 'ec2-52-23-14-156.compute-1.amazonaws.com',
+        'NAME': 'agedcare',
+        'USER': 'mac',
+        'PASSWORD': '',
+        'HOST': 'localhost',
         'PORT': 5432,
     }
 }
