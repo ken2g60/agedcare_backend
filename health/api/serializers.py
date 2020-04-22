@@ -18,28 +18,32 @@ class HealthDataSerializer(serializers.Serializer):
     
     
 class GlucoseSerializer(serializers.Serializer):
-    userId = serializers.CharField()
+    username = serializers.CharField()
     glucose = serializers.CharField()
-    created_at = serializers.DateTimeField()
+    time = serializers.CharField()
+    date = serializers.CharField()
     
     def create(self, validated_data):
         return Glucose.objects.create(**validated_data)
 
 
 class PressureSerializer(serializers.Serializer):
-    userId = serializers.CharField()
+    username = serializers.CharField()
     systolic = serializers.CharField()
     diastolic = serializers.CharField()
-    created_at = serializers.DateTimeField()
+    time = serializers.CharField()
+    date = serializers.CharField()
+    
     
     def create(self, validated_data):
         return Pressure.objects.create(**validated_data)
 
 
 class WeightSerializer(serializers.Serializer):
-    userId = serializers.CharField()
+    username = serializers.CharField()
     weight = serializers.CharField()
-    created_at = serializers.DateTimeField()
+    time = serializers.CharField()
+    date = serializers.CharField()
     
     
     def create(self, validated_data):
