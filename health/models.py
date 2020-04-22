@@ -19,6 +19,8 @@ class HealthData(models.Model):
 class Glucose(models.Model):
     username = models.CharField(_("UserName"), max_length=50)
     glucose = models.CharField(_("Glucose"), max_length=50)
+    date = models.CharField(_("Date"), max_length=50)
+    time = models.CharField(_("Time"), max_length=50)
     created_at = models.DateTimeField(_("Created At"), auto_now=True)
 
 
@@ -26,10 +28,14 @@ class Pressure(models.Model):
     username = models.CharField(_("UserName"), max_length=50)
     systolic = models.CharField(_("Systolic"), max_length=50)
     diastolic = models.CharField(_("Diastolic"), max_length=50)
+    date = models.CharField(_("Date"), max_length=50)
+    time = models.CharField(_("Time"), max_length=50)
     created_at = models.DateTimeField(_("Created At"), auto_now=True)
 
 class Weight(models.Model):
     username = models.CharField(_("UserName"), max_length=50)
     weight = models.CharField(_("Weight"), max_length=50)
+    date = models.CharField(_("Date"), max_length=50)
+    time = models.CharField(_("Time"), max_length=50)
     created_at = models.DateTimeField(_("Created At"), auto_now=True)
     
