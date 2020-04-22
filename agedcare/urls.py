@@ -18,7 +18,7 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls')),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
     path('api/v1/careapp/', include('careapp.api.urls')),
-    path('api/v1/post/', include('post.api.urls')),
+    path('api/v1/blog/', include('post.api.urls')),
     path('api/v1/health/', include('health.api.urls')),
     url(r'hubtel/', Hubtel.as_view()),
 	url(r'africatalking/', AfricaTalking.as_view())
