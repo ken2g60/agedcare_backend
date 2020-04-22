@@ -7,14 +7,14 @@ class HealthAdmin(admin.ModelAdmin):
     list_display = ('userId', 'phonenumber', 'bloodsugar', 'bloodpressure', 'bloodcholesterol', 'bloodlevel', 'weight', 'created_at')
 
 class GlucoseAdmin(admin.ModelAdmin):
-    list_display = ('userId', 'glucose', 'created_at')
+    list_display = ('username', 'glucose', 'created_at')
 
 class PressureAdmin(admin.ModelAdmin):
-    list_display = ('userId', 'systolic', 'diastolic', 'created_at')
+    list_display = ('username', 'systolic', 'diastolic', 'created_at')
 
 
 class WeightAdmin(admin.ModelAdmin):
-    list_display = ('userId', 'weight')
+    list_display = ('username', 'weight', 'created_at')
 
     
     
