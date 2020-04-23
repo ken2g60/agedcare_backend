@@ -22,4 +22,10 @@ urlpatterns = [
     path('api/v1/health/', include('health.api.urls')),
     url(r'hubtel/', Hubtel.as_view()),
 	url(r'africatalking/', AfricaTalking.as_view())
+<<<<<<< HEAD
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+=======
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+>>>>>>> dev
