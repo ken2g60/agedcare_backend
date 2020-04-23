@@ -8,6 +8,7 @@ certifi==2019.11.28
 chardet==3.0.4
 defusedxml==0.6.0
 Django==3.0
+django-cors-headers==3.2.1
 django-filter==2.2.0
 djangorestframework==3.10.3
 gunicorn==20.0.4
@@ -19,6 +20,7 @@ lxml==4.4.2
 Markdown==3.1.1
 mccabe==0.6.1
 phonenumberslite==8.11.1
+Pillow==7.1.1
 psycopg2==2.8.4
 pycodestyle==2.5.0
 pyhubtel-sms==0.0.1
