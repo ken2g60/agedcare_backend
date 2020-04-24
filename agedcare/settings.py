@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'transactions',
     'health',
     'post',
+    'user',
     'rest_framework.authtoken',
 ]
 
