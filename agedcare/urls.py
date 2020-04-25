@@ -16,6 +16,7 @@ admin.site.index_title = "Welcome to AgedCare Portal"
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls')),
+    path('rest-auth/', include('rest_auth.urls')),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
     path('api/v1/careapp/', include('careapp.api.urls')),
     path('api/v1/blog/', include('post.api.urls')),

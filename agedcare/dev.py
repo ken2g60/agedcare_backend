@@ -38,14 +38,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'rest_framework.authtoken',
     'rest_framework',
+    'rest_auth',
     'careapp',
     'agedcare_ussd',
     'transactions',
     'health',
     'post',
     'user',
-    'rest_framework.authtoken',
+    
 ]
 
 MIDDLEWARE = [
