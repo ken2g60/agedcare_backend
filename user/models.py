@@ -13,6 +13,8 @@ from utils.helpers import random_generate
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    username = None
+    
     userId = models.CharField(_("User ID"), max_length=50)
     phonenumber = models.CharField(_("Phonenumber"), max_length=50, unique=True)
     email = models.CharField(_("Email Address"), max_length=50)
@@ -23,7 +25,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     created_at = models.DateTimeField(_("Created At"), auto_now_add=True)
     objects = CustomUserManager()
 
-    
+   
     
     USERNAME_FIELD = 'phonenumber'
     REQUIRED_FIELDS = []
