@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-
+import sentry_sdk
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -26,7 +26,7 @@ SECRET_KEY = '#do$ypfz6@otvarcca#%c6*x8-3_l$b&lcyab(m@1prlxea##$'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+sentry_sdk.init("https://30cf31329c6c447ea62f1f08b22b9d24@o388316.ingest.sentry.io/5225007")
 
 # Application definition
 
@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'rest_auth',
     'django.contrib.sites',
     'allauth',
+    'celery',
+    'django_extensions',
+    'celerybeat_status',
     'rest_auth.registration',
     'careapp',
     'agedcare_ussd',
@@ -194,4 +197,9 @@ SITE_ID = 1
 # ACCOUNT_UNIQUE_EMAIL = True
 # ACCOUNT_USERNAME_REQUIRED = False
 
-CELERY_BROKER_URL = 'amqp://localhost'
+BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'

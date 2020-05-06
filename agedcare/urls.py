@@ -22,7 +22,8 @@ urlpatterns = [
     path('api/v1/blog/', include('post.api.urls')),
     path('api/v1/health/', include('health.api.urls')),
     url(r'hubtel/', Hubtel.as_view()),
-	url(r'africatalking/', AfricaTalking.as_view())
+	url(r'africatalking/', AfricaTalking.as_view()),
+    url(r'^admin/statuscheck/', include('celerybeat_status.urls'), name='celerybeat_status'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
