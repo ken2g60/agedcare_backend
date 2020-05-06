@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'agedcare_ussd',
     'transactions',
-    'redis_cache',
+    'django_redis',
     'health',
     'post',
     'user',

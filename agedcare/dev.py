@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'celerybeat_status',
     'rest_auth.registration',
-    'redis_cache',
+    'django_redis',
     'careapp',
     'agedcare_ussd',
     'transactions',
