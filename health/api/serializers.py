@@ -5,11 +5,11 @@ from careapp.models import PersonalDetail
 class HealthDataSerializer(serializers.Serializer):
     userId = serializers.CharField()
     phonenumber = serializers.CharField()
-    bloodsugar = serializers.CharField()
-    bloodpressure = serializers.CharField()
-    bloodcholesterol = serializers.CharField()
-    bloodlevel = serializers.CharField()
-    weight = serializers.CharField()
+    bloodsugar = serializers.IntegerField()
+    bloodpressure = serializers.IntegerField()
+    bloodcholesterol = serializers.IntegerField()
+    bloodlevel = serializers.IntegerField()
+    weight = serializers.IntegerField()
     created_at = serializers.DateTimeField()
     
     
@@ -19,7 +19,7 @@ class HealthDataSerializer(serializers.Serializer):
     
 class GlucoseSerializer(serializers.Serializer):
     username = serializers.CharField()
-    glucose = serializers.CharField()
+    glucose = serializers.IntegerField()
     time = serializers.CharField()
     date = serializers.CharField()
     
@@ -29,8 +29,8 @@ class GlucoseSerializer(serializers.Serializer):
 
 class PressureSerializer(serializers.Serializer):
     username = serializers.CharField()
-    systolic = serializers.CharField()
-    diastolic = serializers.CharField()
+    systolic = serializers.IntegerField()
+    diastolic = serializers.IntegerField()
     time = serializers.CharField()
     date = serializers.CharField()
     
@@ -41,7 +41,7 @@ class PressureSerializer(serializers.Serializer):
 
 class WeightSerializer(serializers.Serializer):
     username = serializers.CharField()
-    weight = serializers.CharField()
+    weight = serializers.IntegerField()
     time = serializers.CharField()
     date = serializers.CharField()
     
