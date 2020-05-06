@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'agedcare.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 
-
+# add redis
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -97,6 +97,16 @@ DATABASES = {
         'PASSWORD': '3b941aa305733564a0eb873012943871960237c6e699e5de2ccb672b24007397',
         'HOST': 'ec2-52-71-85-210.compute-1.amazonaws.com',
         'PORT': 5432,
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://h:pb66ea8c87345702a4d242151c3ddb19a9a0234bc6502490c8f6df9662f15d111@ec2-3-232-195-55.compute-1.amazonaws.com:24179',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
     }
 }
 
