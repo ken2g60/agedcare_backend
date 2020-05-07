@@ -4,7 +4,7 @@ from celery.schedules import crontab
 from celery.decorators import task
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'agedcare.settings')
-app = Celery('agedcare', broker='redis://h:pb66ea8c87345702a4d242151c3ddb19a9a0234bc6502490c8f6df9662f15d111@ec2-3-232-195-55.compute-1.amazonaws.com:24179')
+app = Celery('agedcare', broker='redis://localhost:6379/')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 # inspect worker for the tasks 
@@ -13,6 +13,7 @@ i = app.control.inspect()
 i.registered()
 i.active()
 i.scheduled
+
 
 app.conf.beat_schedule = {
     'debug_task': {
