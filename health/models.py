@@ -13,13 +13,13 @@ class HealthData(models.Model):
     bloodpressure = models.IntegerField(_("Blood Pressure"))
     bloodcholesterol = models.IntegerField(_("Blood Cholesterol"))
     bloodlevel = models.IntegerField(_("Blood level (Hemoglobin)"))
-    weight = models.DecimalField(_("Glucose"), max_digits=20, decimal_places=2, default=Decimal(0.00))
+    weight = models.FloatField()
     created_at = models.DateTimeField(_("Created At"), auto_now=True)
 
 
 class Glucose(models.Model):
     username = models.CharField(_("phonenumber"), max_length=50)
-    glucose = models.DecimalField(_("Glucose"), max_digits=20, decimal_places=2, default=Decimal(0.00))
+    glucose = models.FloatField()
     date = models.CharField(_("Date"), max_length=50)
     time = models.CharField(_("Time"), max_length=50)
     created_at = models.DateTimeField(_("Created At"), auto_now=True)
@@ -35,7 +35,7 @@ class Pressure(models.Model):
 
 class Weight(models.Model):
     username = models.CharField(_("phonenumber"), max_length=50)
-    weight = models.DecimalField(_("Glucose"), max_digits=20, decimal_places=2, default=Decimal(0.00))
+    weight = models.FloatField()
     date = models.CharField(_("Date"), max_length=50)
     time = models.CharField(_("Time"), max_length=50)
     created_at = models.DateTimeField(_("Created At"), auto_now=True)
