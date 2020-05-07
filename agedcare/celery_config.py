@@ -14,6 +14,7 @@ i.registered()
 i.active()
 i.scheduled
 
+
 app.conf.beat_schedule = {
     'debug_task': {
         'task': 'agedcare.celery.debug_task',
