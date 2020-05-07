@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext as _
 from careapp.models import UserModel
+from decimal import Decimal
 
 
 # Create your models here.
@@ -12,13 +13,13 @@ class HealthData(models.Model):
     bloodpressure = models.IntegerField(_("Blood Pressure"))
     bloodcholesterol = models.IntegerField(_("Blood Cholesterol"))
     bloodlevel = models.IntegerField(_("Blood level (Hemoglobin)"))
-    weight = models.IntegerField(_("Weight"))
+    weight = models.DecimalField(_("Glucose"), max_digits=20, decimal_places=2, default=Decimal(0.00))
     created_at = models.DateTimeField(_("Created At"), auto_now=True)
 
 
 class Glucose(models.Model):
     username = models.CharField(_("phonenumber"), max_length=50)
-    glucose = models.IntegerField(_("Glucose"))
+    glucose = models.DecimalField(_("Glucose"), max_digits=20, decimal_places=2, default=Decimal(0.00))
     date = models.CharField(_("Date"), max_length=50)
     time = models.CharField(_("Time"), max_length=50)
     created_at = models.DateTimeField(_("Created At"), auto_now=True)
@@ -34,7 +35,7 @@ class Pressure(models.Model):
 
 class Weight(models.Model):
     username = models.CharField(_("phonenumber"), max_length=50)
-    weight = models.IntegerField(_("Weight"))
+    weight = models.DecimalField(_("Glucose"), max_digits=20, decimal_places=2, default=Decimal(0.00))
     date = models.CharField(_("Date"), max_length=50)
     time = models.CharField(_("Time"), max_length=50)
     created_at = models.DateTimeField(_("Created At"), auto_now=True)
