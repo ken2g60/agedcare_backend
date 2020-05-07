@@ -9,7 +9,7 @@ class HealthDataSerializer(serializers.Serializer):
     bloodpressure = serializers.IntegerField()
     bloodcholesterol = serializers.IntegerField()
     bloodlevel = serializers.IntegerField()
-    weight = serializers.models.FloatField()
+    weight = serializers.models.CharField()
     created_at = serializers.DateTimeField()
     
     
@@ -20,7 +20,7 @@ class HealthDataSerializer(serializers.Serializer):
     
 class GlucoseSerializer(serializers.Serializer):
     username = serializers.CharField()
-    glucose = serializers.FloatField()
+    glucose = serializers.CharField()
     time = serializers.CharField()
     date = serializers.CharField()
     
@@ -42,7 +42,7 @@ class PressureSerializer(serializers.Serializer):
 
 class WeightSerializer(serializers.Serializer):
     username = serializers.CharField()
-    weight = serializers.FloatField()
+    weight = serializers.CharField()
     time = serializers.CharField()
     date = serializers.CharField()
     
