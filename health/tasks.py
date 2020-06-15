@@ -2,8 +2,8 @@ from celery.decorators import task
 from user.models import CustomUser
 from health.models import Pressure, PressureDataResult
 from pyhubtel_sms import SMS, Message
-from django.db.models import Sum, Count
-
+from django.db.models import Sum, Count, FloatField
+from django.db.models.functions import Cast
 
 sms = SMS(client_id="", client_secret="")
 from sentry_sdk import capture_exception, capture_message
@@ -22,8 +22,8 @@ def weekly_pressure_report():
     customer = CustomUser.objects.values('phonenumber')
     for phonenumber in customer:
         # aggreate for the weekly and do the calculation
-        diastolic = Pressure.objects.filter(created_at__range=[start_week, end_week]).filter(username=phonenumber['phonenumber']).aggregate(Sum('diastolic'))
-        systolic = Pressure.objects.filter(created_at__range=[start_week, end_week]).filter(username=phonenumber['phonenumber']).aggregate(Sum('systolic'))
+        diastolic = Pressure.objects.filter(created_at__range=[start_week, end_week]).filter(username=phonenumber['phonenumber']).annotate(as_float=Cast('diastolic', FloatField()).aggregate(Sum('diastolic'))
+        systolic = Pressure.objects.filter(created_at__range=[start_week, end_week]).filter(username=phonenumber['phonenumber']).annotate(as_float=Cast('systolic', FloatField()).aggregate(Sum('systolic'))
         
         if systolic:
             systolic_count =  Pressure.objects.filter(created_at__range=[start_week, end_week]).filter(username=phonenumber['phonenumber']).values_list('systolic').count()
@@ -57,8 +57,8 @@ def weekly_pressure_report():
 def monthly_pressure_report():
     customer = CustomUser.objects.values('phonenumber')
     for phonenumber in customer:
-        diastolic = Pressure.objects.filter(created_at__year=today.year, created_at__month=today.month).filter(username=phonenumber['phonenumber']).aggregate(Sum('diastolic'))
-        systolic = Pressure.objects.filter(created_at__year=today.year, created_at__month=today.month).filter(username=phonenumber['phonenumber']).aggregate(Sum('systolic'))
+        diastolic = Pressure.objects.filter(created_at__year=today.year, created_at__month=today.month).filter(username=phonenumber['phonenumber']).annotate(as_float=Cast('diastolic', FloatField()).aggregate(Sum('diastolic'))
+        systolic = Pressure.objects.filter(created_at__year=today.year, created_at__month=today.month).filter(username=phonenumber['phonenumber']).annotate(as_float=Cast('systolic', FloatField()).aggregate(Sum('systolic'))
         
         if systolic:
             systolic_count =  Pressure.objects.filter(created_at__year=today.year, created_at__month=today.month).filter(username=phonenumber['phonenumber']).values_list('systolic').count()

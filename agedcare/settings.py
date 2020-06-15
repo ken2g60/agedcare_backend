@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import sentry_sdk
+from decouple import config
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -92,14 +93,15 @@ WSGI_APPLICATION = 'agedcare.wsgi.application'
 # add redis
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd12fqeu6nbbv9c',
-        'USER': 'oxfxqntxoteajb',
-        'PASSWORD': '3b941aa305733564a0eb873012943871960237c6e699e5de2ccb672b24007397',
-        'HOST': 'ec2-52-71-85-210.compute-1.amazonaws.com',
-        'PORT': 5432,
+        'ENGINE': config('ENGINE'),
+        'NAME': config('NAME'),
+        'USER': config('USER'),
+        'PASSWORD': config('PASSWORD'),
+        'HOST': config('HOST'),
+        'PORT': config('PORT'),
     }
 }
+
 
 CACHES = {
     'default': {
@@ -180,9 +182,3 @@ CORS_ORIGIN_ALLOW_ALL =  True
 AUTH_USER_MODEL = 'user.CustomUser'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 SITE_ID = 1
-
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_USERNAME_REQUIRED = False
-

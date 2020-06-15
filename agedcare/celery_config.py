@@ -28,6 +28,10 @@ app.conf.beat_schedule = {
         'task': 'health.tasks.monthly_pressure_report',
         'schedule': crontab(0, 0, day_of_month='1'),
     },
+    'monthly_subscription': {
+        'task': '',
+        'schedule': crontab(0, 0, day_of_month='1'),
+    },
 }
 
 

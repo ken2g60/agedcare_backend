@@ -7,7 +7,6 @@ from django.db.models.signals import pre_save
 from utils.helpers import random_generate 
 
 
-# Create your models here.
 class UserModel(models.Model):
     userId = models.CharField(_("User ID"), max_length=50)
     session_phonenumber = models.CharField(_("Session Phone Number"), max_length=50)
@@ -69,11 +68,6 @@ class PersonalDetail(models.Model):
     
     def model_callable(self):
         return self.user
-        
-    
-    
-
-
 
 class ContributionModel(models.Model):
     userId = models.CharField(_("User ID"), max_length=50)
@@ -82,16 +76,6 @@ class ContributionModel(models.Model):
     # system get month paid
     month = models.CharField(_("Month"), max_length=50, null=True, blank=True)
     created_at = models.DateTimeField(_("Created At"), auto_now=True)
-
-
-class ClaimsModel(models.Model):
-    userId = models.CharField(_("User ID"), max_length=50)
-    amount_withdraw =  models.CharField(_("Withdraw"), max_length=50)
-    purpose =  models.CharField(_("Purpose"), max_length=50)
-    facility_attended = models.CharField(_("Facility Attended"), max_length=50)
-    date_attended = models.CharField(_("Facility Attended"), max_length=50)
-    created_at = models.DateTimeField(_("Created At"), auto_now=True)
-
 
 
     
