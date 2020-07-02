@@ -39,12 +39,14 @@ pre_save.connect(generate_user_id, sender=CustomUser)
 
 
 class Payment(models.Model):
-    amount = models.DecimalField(_("Amount"), max_digits=12, decimal_places=2)
-    first_name = models.CharField(_("First Name"), max_length=50)
-    last_name = models.CharField(_("Last Name"), max_length=50)
-    phonenumber = models.CharField(_("Phone Number"), max_length=50)
+    first_name = models.CharField(_("First Name"), max_length=50, null=True, blank=True)
+    last_name = models.CharField(_("Last Name"), max_length=50, null=True, blank=True)
+    phonenumber = models.CharField(_("Phone Number"), max_length=50, null=True, blank=True)
     subscription = models.CharField(_("Subscription Type"), max_length=50)
-    paid_status = models.BooleanField(_("Payment Status"))
+    paid_status = models.BooleanField(_("Payment Status"), default=False)
+    paid_date = models.DateField(_("Paid Date"), null=True, blank=True)
+    amount = models.CharField(_("Amount"), max_length=50)
+    terminated_on = models.DateField(_("Terminated Date"), null=True, blank=True)
     email = models.CharField(_("Email Address"), max_length=50, null=True, blank=True)
     created_at = models.DateTimeField(_("Created At"), auto_now_add=True)
 
@@ -52,25 +54,27 @@ class Payment(models.Model):
 
 
 class Subscription(models.Model):
-
-    subscription_status = (
+    subscription_choices = (
         ('select option', 'select option'),
-        ('activate', 'activate'),
-        ('deactivate', 'deactivate'),
+        ('monthly', 'monthly'),
+        ('three_months', 'three_months'),
+        ('six_months', 'six_months'),
+        ('annual', 'annual'),
     )
     
-    
+    phonenumber = models.CharField(_("Phone Number"), max_length=50)
+    subscription_type = models.CharField(_("Subscription Type"), max_length=50, choices=subscription_choices)
+    package_type = models.CharField(_("Package Type"), max_length=50)
+    start_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(_("End Date"), null=True, blank=True)
     is_active = models.BooleanField(default=False)
-    initiated_on = models.DateTimeField(null=True, blank=True)
-    terminated_on = models.DateTimeField(null=True, blank=True)
-    subscription_type = models.CharField(_("Subscription Type"), max_length=50)
-    subscription_status = models.CharField(_("Subscription Status"), max_length=50, default=subscription_status[1][1])
     created_at = models.DateTimeField(_("Created At"), auto_now_add=True)
     
-    # update the subscription
+    
+    
     @property
     def get_created_date(self):
-        pass
+        initiated_date_created = self.start_date 
         
     
     @property

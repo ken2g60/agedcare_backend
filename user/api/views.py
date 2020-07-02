@@ -4,14 +4,14 @@ from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView
 from django.contrib.auth import get_user_model 
 from rest_framework.views import APIView
-from user.api.serializers import PaymentSerializer, UserSerializer
+from user.api.serializers import PaymentSerializer, UserSerializer, SubscriptionSerializer
 from rest_framework import status
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
 
-from user.models import Payment, CustomUser
+from user.models import Payment, CustomUser, Subscription
 from sentry_sdk import capture_exception, capture_message
 
 class CreateUserView(CreateAPIView):
@@ -33,6 +33,22 @@ class PaymentAPIView(APIView):
     
     def post(self, request, *args, **kwargs):
         serializer = PaymentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+class SubscriptionAPIView(APIView):
+    
+    def get(self, request):
+        user_subscription  = Subscription.objects.filter(phonenumber=request.user)
+        serializer = SubscriptionSerializer(user_subscription, many=True)
+        return Response(serializer.data)
+        
+    
+    def post(self, request, *args, **kwargs):
+        serializer = SubscriptionSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
