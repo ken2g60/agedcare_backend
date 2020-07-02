@@ -7,7 +7,7 @@ from dateutil.relativedelta import *
 
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'agedcare.settings')
-app = Celery('agedcare', broker='redis://localhost:6379//')
+app = Celery('agedcare', broker='redis://h:pd79879d70657ae7f804c2cc80880b2b313f327b3d3d2a84ef5214dbbd84dd7f6@ec2-34-232-143-93.compute-1.amazonaws.com:22709')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 
