@@ -41,6 +41,7 @@ pycodestyle==2.5.0
 pyhubtel-sms==0.0.1
 pylint==2.4.4
 python-dateutil==2.8.1
+python-decouple==3.3
 python3-openid==3.1.0
 pytz==2019.3
 redis==3.5.0
