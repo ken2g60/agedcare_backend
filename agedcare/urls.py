@@ -17,13 +17,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls')),
     path('rest-auth/', include('rest_auth.urls')),
-    path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
     path('api/v1/user/', include('user.api.urls')),
     path('api/v1/blog/', include('post.api.urls')),
     path('api/v1/health/', include('health.api.urls')),
     url(r'hubtel/', Hubtel.as_view()),
 	url(r'africatalking/', AfricaTalking.as_view()),
     url(r'^admin/statuscheck/', include('celerybeat_status.urls'), name='celerybeat_status'),
+    path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
